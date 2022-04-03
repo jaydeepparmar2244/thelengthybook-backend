@@ -34,6 +34,18 @@ module.exports.viewUsers = function(req,res){
     })
 }
 
+module.exports.viewOneUser = function(req,res){
+    let userId = req.params.userId
+    userModel.findById(userId,function(err,data){
+        if(err){
+            res.json({msg:"Error",status:-1,data:err})
+        }
+        else{
+            res.json({msg:"One User",status:200,data:data})
+        }
+    })
+}
+
 module.exports.updateUser = function(req,res){
     let userId = req.params.userId
     let name = req.body.name

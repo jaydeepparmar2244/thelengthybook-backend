@@ -27,6 +27,7 @@ app.post('/users',userController.addUser)
 app.get('/users',userController.viewUsers)
 app.put('/users/:userId',userController.updateUser)
 app.delete('/users/:userId',userController.deleteUser)
+app.get('/users/:userId',userController.viewOneUser)
 
 app.listen(3001,function(){
     console.log("server listening on port 3001")
