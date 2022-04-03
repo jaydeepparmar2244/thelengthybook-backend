@@ -23,7 +23,7 @@ module.exports.viewRoles = function(req, res){
         }
         else{
             // console.log(data)
-            res.json({msg:"Role Added!",status:200,data:data})
+            res.json({msg:"Roles",status:200,data:data})
 
         }
     })
