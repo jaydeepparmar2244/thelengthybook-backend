@@ -18,6 +18,7 @@ app.use(express.urlencoded({extended:true})) // web--> accept url encoded data f
 // app.use(cors())
 
 app.post('/roles',roleController.addRole)
+app.get('/roles',roleController.viewRoles)
 
 app.listen(3001,function(){
     console.log("server listening on port 3001")
