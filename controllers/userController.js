@@ -1,15 +1,18 @@
 const userModel = require('../models/users')
+const bcrypt = require('bcrypt')
+
 
 module.exports.addUser = function(req,res){
     let name = req.body.name
     let email = req.body.email
     let password = req.body.password
     let role = req.body.role
+    let hashPassword = bcrypt.hashSync(password, 10);
 
     let user = new userModel({
         name:name,
         email:email,
-        password:password,
+        password:hashPassword,
         role:role
     })
 
@@ -23,8 +26,8 @@ module.exports.addUser = function(req,res){
     })
 }
 
-module.exports.viewUsers = function(req,res){
-    userModel.find(function(err,data){
+module.exports.viewAllUsers = function(req,res){
+    userModel.find().populate('role').exec(function(err,data){
         if(err){
             res.json({msg:"Error!",status:-1,data:err})
         }
@@ -36,7 +39,7 @@ module.exports.viewUsers = function(req,res){
 
 module.exports.viewOneUser = function(req,res){
     let userId = req.params.userId
-    userModel.findById(userId,function(err,data){
+    userModel.findById(userId).populate('role').exec(function(err,data){
         if(err){
             res.json({msg:"Error",status:-1,data:err})
         }
